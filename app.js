@@ -4,14 +4,14 @@ const net     = require('net')
 const app = express();
 const PORT = 3000;
 
-var client = new net.Socket();
-
-client.connect(502,'192.168.1.60',function(){
-    console.log('connected');
-})
-
 app.get('/', (req, res)=>{
     var string = "Not received any data";
+    var client = new net.Socket();
+
+    client.connect(502,'192.168.1.60',function(){
+        console.log('connected');
+    })
+	
     client.on('data',function(data){
         string = data.toString()
         console.log('Received : '+string)
