@@ -11,7 +11,7 @@ client.connect(502,'192.168.1.60',function(){
 })
 
 app.get('/', (req, res)=>{
-    var string;
+    var string = "Not received any data";
     client.on('data',function(data){
         string = data.toString()
         console.log('Received : '+string)
