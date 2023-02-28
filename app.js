@@ -4,21 +4,23 @@ const net     = require('net')
 const app = express();
 const PORT = 3000;
 
-app.get('/', (req, res)=>{
-    var string = "Not received any data";
-    var client = new net.Socket();
+var client = new net.Socket();
 
-    client.connect(502,'192.168.1.60',function(){
-        console.log('connected');
-    })
+client.connect(502,'192.168.1.60',function(){
+    console.log('connected');
+})
 	
-    client.on('data',function(data){
-        string = data.toString()
-        console.log('Received : '+string)
-    })
-    console.log('readed weight : ',string)
+client.on('data',function(data){
+    console.log('Received : '+ data.toString());
+})
+
+client.on('error', function(){
+    console.log('ERROR');
+}
+
+app.get('/', (req, res)=>{
     res.set('Content-Type', 'text/html');
-    res.status(200).send("<h1>Readed weight : "+string+"</h1>");
+    res.status(200).send("<h1>Readed weight is on console</h1>");
 });
 
 app.listen(PORT, (error) =>{
