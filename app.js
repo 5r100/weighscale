@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res)=>{
-    client = net.connect({ port: 502, host: 192.168.1.60 }, function () {
+    client = net.connect({ port: 502, host: '192.168.1.60' }, function () {
         console.log('connected');
         res.set('Content-Type', 'text/html');
         res.status(200).send("<h1>connected</h1>");
