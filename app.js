@@ -21,7 +21,7 @@ app.get('/', (req, res)=>{
         console.log(ex);
         res.set('Content-Type', 'text/html');
         res.status(200).send("<h1>ERROR</h1>");
-    }
+    })
 });
 
 app.listen(PORT, (error) =>{
