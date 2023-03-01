@@ -5,6 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res)=>{
+    console.log('new request received');
     client = net.connect({ port: 502, host: '192.168.1.60' }, function () {
         console.log('connected');
         res.set('Content-Type', 'text/html');
