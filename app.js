@@ -34,7 +34,7 @@ function tcp_connection(ip_address)
 
 app.get('/', (req, res)=>{
     console.log('new request received');
-    tcp_client("192.168.1.60");
+    tcp_connection("192.168.1.60");
 });
 
 app.listen(PORT, (error) =>{
