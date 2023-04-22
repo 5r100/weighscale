@@ -10,7 +10,7 @@ app.get('/', (req, res)=>{
     console.log('new request received');
     console.log("connecting....");
     ip_address = '192.168.1.60';
-    client[ip_address] = net.connect({port: 502, host: ip_address}, function() {
+    client[ip_address] = net.connect({port: 25, host: ip_address}, function() {
       console.log('Connection established! '+ip_address);
     });  
     
