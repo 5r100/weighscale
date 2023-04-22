@@ -6,7 +6,7 @@ const PORT = 3000;
 
 var client=[];
 
-function tcp_connection(ip_address)
+function tcp_connection(ip_address,res)
 {
     console.log("connecting....");
     client[ip_address] = net.connect({port: 502, host: ip_address}, function() {
@@ -34,7 +34,7 @@ function tcp_connection(ip_address)
 
 app.get('/', (req, res)=>{
     console.log('new request received');
-    tcp_connection("192.168.1.60");
+    tcp_connection("192.168.1.60",res);
 });
 
 app.listen(PORT, (error) =>{
