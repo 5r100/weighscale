@@ -6,9 +6,10 @@ const PORT = 3000;
 
 var client=[];
 
-app.get('/', (req, res)=>{
-    console.log('new request received');
+function tcp_connection(ip_address)
+{
     console.log("connecting....");
+    ip_address = '192.168.1.60';
     client[ip_address] = net.connect({port: 502, host: ip_address}, function() {
       console.log('Connection established! '+ip_address);
     });  
@@ -30,6 +31,11 @@ app.get('/', (req, res)=>{
         res.set('Content-Type', 'text/html');
         res.status(200).send("<h1>data : "+data.toString()+"</h1>");
     });
+}
+
+app.get('/', (req, res)=>{
+    console.log('new request received');
+    tcp_connection("192.168.1.60");
 });
 
 app.listen(PORT, (error) =>{
@@ -38,4 +44,4 @@ app.listen(PORT, (error) =>{
 	else
 		console.log("Error occurred, server can't start", error);
 	}
-);  
+);
