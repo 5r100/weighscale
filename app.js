@@ -4,37 +4,33 @@ var net     = require('net')
 const app = express();
 const PORT = 3000;
 
-app.set('view engine','ejs');
-
 var client=[];
 
-function measureweight(ip_address,tcp_port,res) {
+function tcp_connection(ip_address,tcp_port)
+{
     console.log("connecting....");
-    
     client[ip_address] = net.connect({port: tcp_port, host: ip_address}, function() {
-            res.render('index',{name : 'connected'});
+      console.log('Connection established! '+ip_address);
     });  
     
     client[ip_address].on('end', function() {
-        res.render('index',{name : 'connection terminated'});
+      console.log('Disconnected :('+ ip_address);               
     });
 
     client[ip_address].on('error', function(ex) {
-        res.render('index',{name : 'cannot connect to IP'});
-        console.log("connection failed"+ex);
+        console.log(ex);
     });
     
     client[ip_address].on('data', function(data)
     {
         var debug_data = data.toString();  
-        res.render('index',{name : debug_data});
+        console.log(debug_data);
     });
 }
 
 app.get('/', (req, res)=>{
     console.log('new request received');
-    res.render('index',{name : 'starting up'});
-    measureweight('192.168.1.60',25,res);
+    tcp_connection('192.168.1.60',25);
 });
 
 app.listen(PORT, (error) =>{
